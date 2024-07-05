@@ -1,0 +1,44 @@
+package ironhack.com.lab9.service;
+
+import ironhack.com.lab9.model.Employee;
+import ironhack.com.lab9.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+
+public class EmployeeService {
+
+    private final EmployeeRepository employeeRepository;
+
+    public List<Employee> findAll() {
+        log.info("Listing all employees");
+        return employeeRepository.findAll();
+    }
+
+    public Optional<Employee> findById(Long employeeId) {
+        log.info("Listing an employee with id: {}",employeeId );
+        return employeeRepository.findById(employeeId);
+
+    }
+
+    public List<Employee> findAllByStatus(String status) {
+        log.info("Listing all employees with status: {}", status);
+        return employeeRepository.findAllByStatusIgnoreCase(status);
+    }
+
+    public List<Employee> findAllByDepartment(String department) {
+        log.info("Listing all employees with department: {}", department);
+        return employeeRepository.findAllByDepartmentIgnoreCase(department);
+    }
+
+
+
+
+}
