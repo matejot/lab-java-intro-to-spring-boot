@@ -3,7 +3,9 @@ package ironhack.com.lab9.controller;
 
 import ironhack.com.lab9.model.Patient;
 import ironhack.com.lab9.service.PatientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +43,18 @@ public class PatientController {
     public List<Patient> getPatientByDoctorStatusOff() {
         return patientService.findPatientByDoctorStatusOff();
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient addPatient(@RequestBody @Valid Patient patient){
+        return patientService.addPatient(patient);
+    }
+
+    @PutMapping("/{patientId}")
+    public Patient updatePatient(@PathVariable("patientId") Long patientId,
+                                 @RequestBody Patient patient){
+        return patientService.updatePatient(patientId,patient);
+    }
+
 
 }

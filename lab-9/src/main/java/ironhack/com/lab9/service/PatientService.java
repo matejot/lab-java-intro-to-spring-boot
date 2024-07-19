@@ -4,6 +4,7 @@ import ironhack.com.lab9.model.Patient;
 import ironhack.com.lab9.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,23 @@ public class PatientService {
         return patientRepository.findPatientByDoctorStatusOff();
     }
 
+    public Patient addPatient(Patient patient){
+        log.info("Adding new patient{}", patient);
+        return patientRepository.save(patient);
+    }
+
+    public Patient updatePatient(Long patientId, Patient patient){
+        log.info("Updating patient with id{}", patientId);
+
+        var patientToUpdate = patientRepository.findById(patientId).orElseThrow();
+        patientToUpdate.setName(patient.getName());
+        patientToUpdate.setDate(patient.getDate());
+        patientToUpdate.setEmployeeId(patient.getEmployeeId());
+
+        return  patientRepository.save(patientToUpdate);
+
+
+    }
 
 
 }

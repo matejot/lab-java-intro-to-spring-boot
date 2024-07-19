@@ -4,6 +4,7 @@ import ironhack.com.lab9.model.Employee;
 import ironhack.com.lab9.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,22 @@ public class EmployeeService {
     public List<Employee> findAllByDepartment(String department) {
         log.info("Listing all employees with department: {}", department);
         return employeeRepository.findAllByDepartmentIgnoreCase(department);
+    }
+
+    public Employee addEmployee(Employee employee){
+        log.info("Adding new employee{}", employee);
+        return employeeRepository.save(employee);
+    }
+
+    public Employee updateEmployee(Long employeeId, Employee employee){
+        log.info("Updating employee with id{}", employeeId);
+        var employeeToUpdate = employeeRepository.findById(employeeId).orElseThrow();
+        employeeToUpdate.setName(employee.getName());
+        employeeToUpdate.setDepartment(employee.getDepartment());
+        employeeToUpdate.setStatus(employee.getStatus());
+//        employeeToUpdate.setPatients(employee.getPatients());
+
+        return  employeeRepository.save(employeeToUpdate);
     }
 
 

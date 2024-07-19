@@ -15,9 +15,9 @@ public interface PatientRepository extends JpaRepository <Patient, Long>  {
 //    @Query("SELECT p FROM Patient p where p.date BETWEEN :startDate AND :endDate")
         List<Patient> findPatientByDateBetween(String date, String date2);
 
-        @Query("SELECT p FROM Patient p WHERE p.employee.department = :department")
+        @Query("SELECT p FROM Patient p WHERE p.employeeId.department = :department")
         List<Patient> findPatientByDoctorDepartment(@Param("department") String department);
 
-        @Query("SELECT p FROM Patient p WHERE p.employee.status = 'off' ")
+        @Query("SELECT p FROM Patient p WHERE p.employeeId.status = 'off' ")
         List<Patient> findPatientByDoctorStatusOff();
 }

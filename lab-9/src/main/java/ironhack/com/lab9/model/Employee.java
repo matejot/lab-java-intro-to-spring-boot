@@ -22,9 +22,9 @@ public class Employee {
     private String name;
     private String status;
 
-    @OneToMany(mappedBy = "employee")
-    @JsonIgnore
-    private List<Patient> patients;
+//    @OneToMany(mappedBy = "employee")
+//    @JsonIgnore
+//    private List<Patient> patients;
 
     public Employee(String department, String name, String status){
         this.department = department;

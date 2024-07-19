@@ -2,11 +2,11 @@ package ironhack.com.lab9.controller;
 
 import ironhack.com.lab9.model.Employee;
 import ironhack.com.lab9.service.EmployeeService;
+import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -43,6 +43,22 @@ public class EmployeeController {
     public List<Employee> getEmployeesDepartment(@PathVariable("department") String department) {
         return employeeService.findAllByDepartment(department);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee addEmployee(@RequestBody @Valid Employee employee){
+        return employeeService.addEmployee(employee);
+    }
+
+    @PutMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Employee updateEmployee(@PathVariable("employeeId") Long employeeId,
+                                   @RequestBody Employee employee){
+        return employeeService.updateEmployee(employeeId, employee);
+
+    }
+
+
 
 
 

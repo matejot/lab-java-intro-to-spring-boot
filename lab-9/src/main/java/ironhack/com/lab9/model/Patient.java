@@ -14,16 +14,16 @@ import lombok.NoArgsConstructor;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long patient_id;
+    private Long patientId;
     private String name;
     private String date;
     @ManyToOne
     @JoinColumn(name = "admitted_by")
-    private Employee employee;
+    private Employee employeeId;
 
-    public Patient(String name, String date, Employee employee) {
+    public Patient(String name, String date, Employee employeeId) {
         this.name = name;
         this.date = date;
-        this.employee = employee;
+        this.employeeId = employeeId;
     }
 }
